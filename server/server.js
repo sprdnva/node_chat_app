@@ -11,6 +11,16 @@ const io = socketIO(server);
 
 io.on("connection", socket => {
   console.log("new user connected");
+
+  socket.emit("newMessage", {
+    from: "julie@gotit",
+    text: "hey",
+    createdAt: Date.toString()
+  });
+
+  socket.on("createdMessage", message => {
+    console.log(message);
+  });
 });
 
 app.use(express.static(publicPath));
