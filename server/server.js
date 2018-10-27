@@ -11,15 +11,30 @@ const io = socketIO(server);
 
 io.on("connection", socket => {
   console.log("new user connected");
-
   socket.emit("newMessage", {
-    from: "julie@gotit",
-    text: "hey",
-    createdAt: Date.toString()
+    form: "Admin",
+    text: "Welcome to the chat app",
+    createdAt: new Date().getTime().toString()
+  });
+
+  socket.broadcast.emit("newMessage", {
+    from: "Admin",
+    text: "New user joined",
+    createdAt: new Date().getTime().toString()
   });
 
   socket.on("createdMessage", message => {
     console.log(message);
+    io.emit("newMessage", {
+      from: message.from,
+      text: message.text,
+      createdAt: new Date().getTime().toString()
+    });
+    // socket.broadcast.emit("newMessage", {
+    //   from: "server",
+    //   text: "broadcasting",
+    //   createdAt: new Date().toLocaleDateString()
+    // });
   });
 });
 

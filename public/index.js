@@ -7,9 +7,9 @@ socket.on("connect", () => {
     console.log(message);
   });
 
-  socket.emit("createdMessage", {
-    from: "hagrid@hogwarts",
-    text: "get here you",
-    createdAt: Date.toString()
-  });
+  //   socket.emit("createdMessage", {
+  //     from: "hagrid@hogwarts",
+  //     text: "get here you",
+  //     createdAt: Date.toString()
+  //   });
 });
